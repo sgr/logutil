@@ -1,7 +1,7 @@
 # log-utils
 
 A Clojure library designed to use java.util.logging easily.
-It provides two custom classes and one utility function.
+It provides two utility classes and one function.
 
 * logutil.Log4JLikeFormatter
 * logutil.LazyFileHandler
@@ -9,7 +9,7 @@ It provides two custom classes and one utility function.
 
 ## Usage
 
-See example.clj
+See doc/example.clj
 
 ## License
 
