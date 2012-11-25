@@ -9,7 +9,7 @@ It provides two utility classes and one function.
 
 ## Usage
 
-See doc/example.clj
+See doc/intro.md and doc/example.clj
 
 ## License
 
