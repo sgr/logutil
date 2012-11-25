@@ -1,4 +1,4 @@
-# log-utils
+# logutil
 
 A Clojure library designed to use java.util.logging easily.
 It provides two utility classes and one function.
