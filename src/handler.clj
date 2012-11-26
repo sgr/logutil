@@ -33,24 +33,12 @@
 (defn- lfh-init-with-prop [this]
   (let [lmgr (LogManager/getLogManager)
         path (.getProperty lmgr "logutil.LazyFileHandler.path")
-        fmtr (.getProperty lmgr "logutil.LazyFileHandler.formatter")
-        lv   (.getProperty lmgr "logutil.LazyFileHandler.level")]
+        fmtr (.getProperty lmgr "logutil.LazyFileHandler.formatter")]
     (when path
       (lfh-setPath this path))
     (.setFormatterSuper this (if fmtr
                                (.newInstance (Class/forName fmtr))
-                               (SimpleFormatter.)))
-    (.setLevelSuper this (condp = lv
-                           "OFF"     Level/OFF
-                           "SEVERE"  Level/SEVERE
-                           "WARNING" Level/WARNING
-                           "INFO"    Level/INFO
-                           "CONFIG"  Level/CONFIG
-                           "FINE"    Level/FINE
-                           "FINER"    Level/FINER
-                           "FINEST"  Level/FINEST
-                           "ALL"     Level/ALL
-                           Level/ALL))))
+                               (SimpleFormatter.)))))
 
 (defn- lfh-post-init
   ([this]
