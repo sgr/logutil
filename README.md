@@ -1,11 +1,13 @@
 # logutil
 
-A Clojure library designed to use java.util.logging easily.
-It provides two utility classes and one function.
+A Clojure library designed to use Java Logging API easily.
+It provides following utility classes and functions.
 
 * logutil.Log4JLikeFormatter
 * logutil.LazyFileHandler
-* init-root-handler
+
+* logutil/configure-logging
+* logutil/config-stream
 
 ## Usage
 

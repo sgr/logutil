@@ -1,23 +1,20 @@
 ;; -*- coding: utf-8-unix -*-
 (ns example
-  (:use [clojure.tools.logging]
-        [logutil :only [init-root-handler]])
-  (:import [java.util.logging Handler Level Logger]
-           [java.util.logging FileHandler MemoryHandler StreamHandler]))
+  (:use [logutil :only [configure-logging]]
+        [clojure.tools.logging]))
 
-(defn -main []
-  (let [sh (doto (StreamHandler. System/err (logutil.Log4JLikeFormatter.))
-             (.setEncoding "utf-8"))
-;;        fh (doto (FileHandler. "tmp.log" true)
-;;             (.setFormatter (logutil.Log4JLikeFormatter.)))
-        lh (logutil.LazyFileHandler. "tmp.log" (logutil.Log4JLikeFormatter.))
-        mh (doto (MemoryHandler. lh 1000 Level/SEVERE)
-             (.setLevel Level/ALL))]
-    (init-root-handler mh))
+(defn -main [& args]
+  (configure-logging
+   {"handlers" "java.util.logging.MemoryHandler"
+    "java.util.logging.MemoryHandler.target" "logutil.LazyFileHandler"
+    "logutil.LazyFileHandler.path" "tmp.log"
+    "logutil.LazyFileHandler.level" "ALL"
+    "logutil.LazyFileHandler.formatter" "logutil.Log4JLikeFormatter"
+    ".level" "INFO"
+    "exam.level" "ALL"})
   (trace "trace")
   (debug "debug!")
   (info  "info!!")
   (warn  "warn!!!")
   (error "error!!!!")
-  (fatal "fatal!!!!!")
-  )
+  (fatal "fatal!!!!!"))

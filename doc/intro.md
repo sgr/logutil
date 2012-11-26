@@ -3,23 +3,17 @@
 ## Log4JLikeFormatter
 
 It extends java.util.logging.Formatter.
-To use it, You may call Handler#setFormatter.
-
-```Clojure
-  (doto (FileHandler. "%t/foo_%g.log" true)
-    (.setFormatter (logutil.Log4JLikeFormatter.)))
-```
 
 ## LazyFileHandler
 
 It extends java.util.logging.StreamHandler.
 It doesn't create log file until published LogRecord, so that it is used with MemoryHandler.
 
-```Clojure
-  (let [lh (logutil.LazyFileHandler. "tmp.log" (logutil.Log4JLikeFormatter.))
-        mh (doto (MemoryHandler. lh 1000 Level/SEVERE)
-             (.setLevel Level/ALL))]
-    (init-root-handler mh))
-```
+* logutil.LazyFileHandler.level specifies the default level for the handler (defaults to Level/ALL).
+* logutil.LazyFileHandler.formatter specifies the name of a formatter class to use (defaults to java.util.logging.SimpleFormatter).
+* logutil.LazyFileHandler.path specifies the name of log file.
 
-"init-root-handler" is a utility function to set your handler to root handler.
+## configure-logging
+
+It is a utility function to reinitialize logging configuration from a property map.
+
