@@ -49,7 +49,6 @@
 
 (defn- lfh-publish [this ^LogRecord r]
   (when-not (:opened @(.state this))
-    (lfh-init-with-prop this)
     (let [f (:file @(.state this))]
       (.setOutputStreamSuper this (FileOutputStream. f (.exists f))))
     (swap! (.state this) assoc :opened true))
