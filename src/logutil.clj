@@ -1,15 +1,22 @@
 ;; -*- coding: utf-8-unix -*-
 (ns logutil
-  (:gen-class)
   (:require [formatter]
             [handler])
-  (:import [java.util.logging Handler Level Logger]))
+  (:gen-class)
+  (:import [java.io ByteArrayInputStream ByteArrayOutputStream InputStream]
+           [java.util.logging LogManager]))
 
-(defn- clear-handlers [^Logger l]
-  (doseq [h (.getHandlers l)]
-    (.removeHandler l h)))
+(defn ^InputStream config-stream
+  "Translate property map to an InputStream of Properties."
+  [m]
+  (let [baos (ByteArrayOutputStream.)
+        props (java.util.Properties.)]
+    (doseq [[k v] m] (.setProperty props k v))
+    (.store props baos "store to pipe")
+    (ByteArrayInputStream. (.toByteArray baos))))
 
-(defn init-root-handler [^Handler h]
-  (doto (.getParent (Logger/getLogger Logger/GLOBAL_LOGGER_NAME))
-    clear-handlers
-    (.addHandler h)))
+(defn configure-logging
+  "Reinitialize logging configuration from a property map."
+  [m]
+  (doto (LogManager/getLogManager)
+    (.readConfiguration (config-stream m))))
