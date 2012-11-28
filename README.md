@@ -9,6 +9,13 @@ It provides following utility classes and functions.
 * logutil/configure-logging
 * logutil/config-stream
 
+## Install
+
+logutil is available in [Clojars.org](https://clojars.org/logutil).
+Your leiningen project.clj:
+
+   [logutil "0.2.0"]
+
 ## Usage
 
 See [doc/intro.md](https://github.com/sgr/logutil/blob/master/doc/intro.md) and [doc/example.clj](https://github.com/sgr/logutil/blob/master/doc/example.clj)
