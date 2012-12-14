@@ -11,7 +11,7 @@
     "logutil.LazyFileHandler.level" "ALL"
     "logutil.LazyFileHandler.formatter" "logutil.Log4JLikeFormatter"
     ".level" "INFO"
-    "exam.level" "ALL"})
+    "example.level" "ALL"})
   (trace "trace")
   (debug "debug!")
   (info  "info!!")
