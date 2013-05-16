@@ -3,22 +3,37 @@
 A Clojure library designed to use Java Logging API easily.
 It provides following utility classes and functions.
 
-* logutil.Log4JLikeFormatter
-* logutil.LazyFileHandler
+### logutil.Log4JLikeFormatter
 
-* logutil/configure-logging
-* logutil/config-stream
+It extends java.util.logging.Formatter.
+
+### logutil.LazyFileHandler
+
+It extends java.util.logging.StreamHandler.
+It doesn't create log file until published LogRecord, so that it is used with MemoryHandler.
+
+* logutil.LazyFileHandler.level specifies the default level for the handler (defaults to Level/ALL).
+* logutil.LazyFileHandler.formatter specifies the name of a formatter class to use (defaults to java.util.logging.SimpleFormatter).
+* logutil.LazyFileHandler.path specifies the name of log file.
+
+### logutil/configure-logging
+
+It is a utility function to reinitialize logging configuration from a property map.
 
 ## Install
 
 logutil is available in [Clojars.org](https://clojars.org/logutil).
 Your leiningen project.clj:
 
-   [logutil "0.2.0"]
+   [logutil "0.2.2"]
 
 ## Usage
 
-See [doc/intro.md](https://github.com/sgr/logutil/blob/master/doc/intro.md) and [doc/example.clj](https://github.com/sgr/logutil/blob/master/doc/example.clj)
+See [doc/example.clj](https://github.com/sgr/logutil/blob/master/doc/example.clj).
+
+## Documentation
+
+See [API Document](http://sgr.github.io/logutil/).
 
 ## License
 
