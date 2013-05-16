@@ -29,7 +29,7 @@ Your leiningen project.clj:
 
 ## Usage
 
-See [doc/example.clj](https://github.com/sgr/logutil/blob/master/doc/example.clj).
+See [doc/example.clj](https://github.com/sgr/logutil/blob/master/example.clj).
 
 ## Documentation
 
