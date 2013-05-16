@@ -1,7 +1,7 @@
 # logutil
 
 A Clojure library designed to use Java Logging API easily.
-It provides following utility classes and functions.
+It provides several utility classes and functions.
 
 ## Install
 
