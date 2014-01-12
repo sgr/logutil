@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8-unix -*-
-(ns formatter
+(ns logutil.formatter
   (:import [java.text SimpleDateFormat]
            [java.util Date]
            [java.util.logging Formatter LogRecord]))

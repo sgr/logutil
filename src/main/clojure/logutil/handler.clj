@@ -1,5 +1,5 @@
 ;; -*- coding: utf-8-unix -*-
-(ns handler
+(ns logutil.handler
   (:import [java.io File FileOutputStream]
            [java.util.logging Formatter Level LogManager LogRecord SimpleFormatter]))
 
