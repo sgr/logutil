@@ -8,23 +8,23 @@
 (defn- test-frame []
   (let [e (GraphicsEnvironment/getLocalGraphicsEnvironment)
         p (.getCenterPoint e)
-        WIDTH 300
-        HEIGHT 200
+        width 300
+        height 200
         btn (sc/button :text "display log dialog")
         frame (sc/frame :title "test"
                         :content btn
-                        :size [WIDTH :by HEIGHT]
+                        :size [width :by height]
                         :on-close :dispose)]
     (sc/listen btn :action
                (fn [_]
                  (doto (log-dlg frame)
                    (.setVisible true))))
     (doto frame
-      (sc/move! :to [(- (.x p) (int (/ WIDTH 2))) (- (.y p) (int (/ HEIGHT 2)))]))))
+      (sc/move! :to [(- (.x p) (int (/ width 2))) (- (.y p) (int (/ height 2)))]))))
 
 (defn- log-all-level [i]
-  (let [msg (format "logging %d" i)]
-    (doseq [level [:info :debug :trace :warn :error :fatal]] (log/log level msg))))
+  (doseq [level [:info :debug :trace :warn :error :fatal]]
+    (log/logf level "logged [%d] to level [%s]" i (name level))))
 
 (def ^{:private true} PMAP-CLI
   {"handlers" "java.util.logging.ConsoleHandler"
