@@ -152,7 +152,8 @@
 
   (defn ^JDialog log-dlg
     "Display a dialog for viewing logs.
-     \"parent\" is a parent frame."
+     \"parent\" is a parent frame.
+     Call \"configure-logging-swing\" before calling this function."
     [parent]
     (when-not @handler-info (configure-logging-swing 100 {}))
     (let [op (doto (JOptionPane.)

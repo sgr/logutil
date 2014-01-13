@@ -35,7 +35,7 @@
 
 (def ^{:private true} PMAP-GUI
   {".level" "ALL"
-   "logutil-test.level" "FINE"})
+   "logutil-test.level" "ALL"})
 
 (deftest ^:cli console-log-test
   (testing "initialize logging CLI"
