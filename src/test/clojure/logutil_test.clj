@@ -24,7 +24,7 @@
 
 (defn- log-all-level [i]
   (doseq [level [:info :debug :trace :warn :error :fatal]]
-    (log/logf level "logged [%d] to level [%s]" i (name level))))
+    (log/logf level "logged [%d] as %s" i (name level))))
 
 (def ^{:private true} PMAP-CLI
   {"handlers" "java.util.logging.ConsoleHandler"
