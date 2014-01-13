@@ -15,6 +15,11 @@
            [com.github.sgr.logging LogRecordRenderer LogRecordRow TableModelHandler]
            [com.github.sgr.swing MultiLineTable]))
 
+(def ^{:private true} PMAP-GUI-EXCLUDE
+  {"java.level" "INFO"
+   "javax.level" "INFO"
+   "sun.level" "INFO"})
+
 (defn ^InputStream config-stream
   "Translate property map to an InputStream of Properties."
   [m]
@@ -62,7 +67,7 @@
     (let [root-logger (Logger/getLogger "")]
       (doseq [h (.getHandlers root-logger)] (.removeHandler root-logger h))
       (doto (LogManager/getLogManager) (.reset))
-      (configure-logging property-map)
+      (configure-logging (merge property-map PMAP-GUI-EXCLUDE))
       (reset! handler-severe  (doto (TableModelHandler. capacity) (.setLevel Level/SEVERE)))
       (reset! handler-warning (doto (TableModelHandler. capacity) (.setLevel Level/WARNING)))
       (reset! handler-info    (doto (TableModelHandler. capacity) (.setLevel Level/INFO)))
@@ -145,12 +150,22 @@
                                  :items [[(sc/label "Log level") "align right"] [combo "grow"] [cbtn "align right"]])
                          :center (sc/scrollable tbl)))))
 
-  (defn ^JDialog log-dlg [parent]
+  (defn ^JDialog log-dlg
+    "Display a dialog for viewing logs.
+     \"parent\" is a parent frame."
+    [parent]
+    (when-not @handler-info (configure-logging-swing 100 {}))
     (let [op (doto (JOptionPane.)
                (.setOptionType JOptionPane/DEFAULT_OPTION)
                (.setMessage (log-panel)))]
-      (doto (.createDialog op parent "Application Log")
-        (.setDefaultCloseOperation WindowConstants/DISPOSE_ON_CLOSE)
-        (.setLocationRelativeTo parent)
-        (.setModalityType Dialog$ModalityType/MODELESS)
-        (.pack)))))
+      (if parent
+        (doto (.createDialog op parent "Application Log")
+          (.setDefaultCloseOperation WindowConstants/DISPOSE_ON_CLOSE)
+          (.setLocationRelativeTo parent)
+          (.setModalityType Dialog$ModalityType/MODELESS)
+          (.pack))
+        (doto (.createDialog op "Application Log")
+          (.setDefaultCloseOperation WindowConstants/DISPOSE_ON_CLOSE)
+          (.setModalityType Dialog$ModalityType/MODELESS)
+          (.pack))))))
+

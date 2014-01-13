@@ -10,6 +10,9 @@
   :source-paths ["src/main/clojure"]
   :java-source-paths ["src/main/java"]
   :test-paths ["src/test/clojure"]
+  :test-selectors {:default (complement :gui)
+                   :gui :gui
+                   :all (constantly true)}
   :aot :all
   :plugins [[codox "0.6.4"]]
   :codox {:sources ["src/main/clojure"]
