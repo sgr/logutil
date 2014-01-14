@@ -1,4 +1,4 @@
-(defproject logutil "0.3.0"
+(defproject logutil "0.3.0-ALPHA"
   :description "A Clojure library designed to use Java Logging API easily."
   :url "https://github.com/sgr/logutil"
   :license {:name "Eclipse Public License"
