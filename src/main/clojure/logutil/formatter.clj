@@ -1,8 +1,7 @@
 ;; -*- coding: utf-8-unix -*-
 (ns logutil.formatter
-  (:import [java.text SimpleDateFormat]
-           [java.util Date]
-           [java.util.logging Formatter LogRecord]))
+  (:import [java.util.logging Formatter LogRecord]
+           [org.apache.commons.lang3.time FastDateFormat]))
 
 (def ^{:private true} SEPARATOR (System/getProperty "line.separator"))
 
@@ -19,12 +18,13 @@
  :extends java.util.logging.Formatter
  :prefix "l4f-")
 
-(defn- l4f-format [this ^LogRecord r]
-  (let [msg (format "%s %-7s %s [%d] %s%s"
-                    (.format (SimpleDateFormat. "yyyy-MM-dd HH:mm:ss SSS") (Date. (.getMillis r)))
-                    (.getName (.getLevel r))
-                    (.getLoggerName r)
-                    (.getThreadID r)
-                    (.getMessage r)
-                    SEPARATOR)]
-    (if-let [e (.getThrown r)] (with-throwable msg e) msg)))
+(let [fmt (FastDateFormat/getInstance "yyyy-MM-dd HH:mm:ss SSS")]
+  (defn- l4f-format [this ^LogRecord r]
+    (let [msg (format "%s %-7s %s [%d] %s%s"
+                      (.format fmt (.getMillis r))
+                      (.getName (.getLevel r))
+                      (.getLoggerName r)
+                      (.getThreadID r)
+                      (.getMessage r)
+                      SEPARATOR)]
+      (if-let [e (.getThrown r)] (with-throwable msg e) msg))))
