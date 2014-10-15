@@ -8,7 +8,7 @@ It provides several utility classes and functions.
 logutil is available in [Clojars.org](https://clojars.org/logutil).
 Your leiningen project.clj:
 
-   [logutil "0.2.3"]
+   [logutil "0.2.4"]
 
 ## Usage
 
