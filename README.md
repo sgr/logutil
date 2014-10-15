@@ -5,10 +5,9 @@ It provides several utility classes and functions.
 
 ## Install
 
-logutil is available in [Clojars.org](https://clojars.org/logutil).
-Your leiningen project.clj:
+logutil is available in [Clojars.org](https://clojars.org/).
 
-   [logutil "0.2.4"]
+[![Clojars Project](http://clojars.org/logutil/latest-version.svg)](http://clojars.org/logutil)
 
 ## Usage
 
