@@ -18,5 +18,5 @@
   :codox {:sources ["src/main/clojure"]
           :exclude [logutil.formatter logutil.handler]
           :output-dir "doc"
-          :src-dir-uri "https://github.com/sgr/logutil/blob/master"
+          :src-dir-uri "https://github.com/sgr/logutil/blob/master/"
           :src-linenum-anchor-prefix "L"})
